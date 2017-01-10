@@ -20,6 +20,11 @@ RUN java -jar /usr/share/java/saxon.jar -s:/opt/jboss/keycloak/standalone/config
 
 ENV JBOSS_HOME /opt/jboss/keycloak
 
+USER root
+RUN chown -R :0 /opt/jboss && \
+    chmod -R g+rwX /opt/jboss
+USER jboss
+
 EXPOSE 8080
 
 ENTRYPOINT [ "/opt/jboss/docker-entrypoint.sh" ]
